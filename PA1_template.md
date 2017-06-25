@@ -40,8 +40,21 @@ hist(stepsperday$steps, main="Histogram of total steps per day" , ylim=c(0,40))
 ```r
 meanstepsperday <- round(mean(stepsperday$steps, na.rm=TRUE),2)
 medianstepsperday <- round(median(stepsperday$steps, na.rm=TRUE),0)
+meanstepsperday
 ```
-The mean of total number of steps taken per day is 1.076619\times 10^{4}
+
+```
+## [1] 10766.19
+```
+
+```r
+medianstepsperday
+```
+
+```
+## [1] 10765
+```
+The mean of total number of steps taken per day is 1.076619\times 10^{4}  
 The median of total number of steps taken per day is 1.0765\times 10^{4}
 
 
@@ -58,6 +71,25 @@ ggplot(avgstepsperinterval, aes(x=interval, y=steps)) + geom_line() +  labs(titl
 ```r
 maxinterval <- avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps),1]
 maxsteps <- avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps),2]
+maxinterval
+```
+
+```
+## # A tibble: 1 x 1
+##   interval
+##      <int>
+## 1      835
+```
+
+```r
+maxsteps
+```
+
+```
+## # A tibble: 1 x 1
+##      steps
+##      <dbl>
+## 1 206.1698
 ```
 On average across all the days the maximum number of steps is taken in the 5-minute interval at 835
 The average number of steps taken in this interval is 206.1698113
@@ -67,7 +99,14 @@ The average number of steps taken in this interval is 206.1698113
 
 ```r
 totalmissing <- sum(is.na(activitydata))
+totalmissing
+```
 
+```
+## [1] 2304
+```
+
+```r
 activitydatacompleted <- activitydata
 
 activitydatacompleted[is.na(activitydatacompleted$steps),"steps"] <- round(avgstepsperinterval[match(activitydatacompleted$interval, avgstepsperinterval$interval), 2])
@@ -94,6 +133,19 @@ hist(stepsperday$steps, main="Histogram of total steps per day" , ylim=c(0,40))
 ```r
 meanstepsperdaycomplete <- mean(stepsperdaycompleted$steps, na.rm=TRUE)
 medianstepsperdaycomplete <- median(stepsperdaycompleted$steps, na.rm=TRUE)
+meanstepsperdaycomplete
+```
+
+```
+## [1] 10765.64
+```
+
+```r
+medianstepsperdaycomplete
+```
+
+```
+## [1] 10762
 ```
 Total number of missing values in the dataset is 2304
 The mean of total number of steps taken per day (completed dataset) is 1.0765639\times 10^{4}

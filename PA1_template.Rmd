@@ -25,8 +25,10 @@ stepsperday <- activitydata %>%   group_by(date) %>%   summarise(steps = sum(ste
 hist(stepsperday$steps, main="Histogram of total steps per day" , ylim=c(0,40))
 meanstepsperday <- round(mean(stepsperday$steps, na.rm=TRUE),2)
 medianstepsperday <- round(median(stepsperday$steps, na.rm=TRUE),0)
+meanstepsperday
+medianstepsperday
 ```
-The mean of total number of steps taken per day is `r meanstepsperday`
+The mean of total number of steps taken per day is `r meanstepsperday`  
 The median of total number of steps taken per day is `r medianstepsperday`
 
 
@@ -37,6 +39,8 @@ avgstepsperinterval <- activitydata %>%   group_by(interval) %>%   summarise(ste
 ggplot(avgstepsperinterval, aes(x=interval, y=steps)) + geom_line() +  labs(title ="Average daily activity pattern", x = "Time", y = "Average Steps") 
 maxinterval <- avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps),1]
 maxsteps <- avgstepsperinterval[avgstepsperinterval$steps == max(avgstepsperinterval$steps),2]
+maxinterval
+maxsteps
 ```
 On average across all the days the maximum number of steps is taken in the 5-minute interval at `r maxinterval`
 The average number of steps taken in this interval is `r maxsteps`
@@ -45,7 +49,7 @@ The average number of steps taken in this interval is `r maxsteps`
 
 ``` {r missingvalues}
 totalmissing <- sum(is.na(activitydata))
-
+totalmissing
 activitydatacompleted <- activitydata
 
 activitydatacompleted[is.na(activitydatacompleted$steps),"steps"] <- round(avgstepsperinterval[match(activitydatacompleted$interval, avgstepsperinterval$interval), 2])
@@ -56,6 +60,8 @@ hist(stepsperday$steps, main="Histogram of total steps per day" , ylim=c(0,40))
 
 meanstepsperdaycomplete <- mean(stepsperdaycompleted$steps, na.rm=TRUE)
 medianstepsperdaycomplete <- median(stepsperdaycompleted$steps, na.rm=TRUE)
+meanstepsperdaycomplete
+medianstepsperdaycomplete
 ```
 Total number of missing values in the dataset is `r totalmissing`
 The mean of total number of steps taken per day (completed dataset) is `r meanstepsperdaycomplete`
